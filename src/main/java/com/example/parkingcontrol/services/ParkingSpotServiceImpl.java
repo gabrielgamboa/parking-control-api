@@ -2,11 +2,15 @@ package com.example.parkingcontrol.services;
 
 import com.example.parkingcontrol.models.ParkingSpotModel;
 import com.example.parkingcontrol.repositories.ParkingSpotRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class ParkingSpotServiceImpl implements ParkingSpotService {
@@ -36,7 +40,18 @@ public class ParkingSpotServiceImpl implements ParkingSpotService {
     }
 
     @Override
-    public List<ParkingSpotModel> findAll() {
-        return this.parkingSpotRepository.findAll();
+    public Page<ParkingSpotModel> findAll(Pageable pageable) {
+        return this.parkingSpotRepository.findAll(pageable);
+    }
+
+    @Override
+    public Optional<ParkingSpotModel> findById(UUID id) {
+        return this.parkingSpotRepository.findById(id);
+    }
+
+    @Override
+    @Transactional
+    public void delete(ParkingSpotModel parkingSpotModel) {
+        this.parkingSpotRepository.delete(parkingSpotModel);
     }
 }
