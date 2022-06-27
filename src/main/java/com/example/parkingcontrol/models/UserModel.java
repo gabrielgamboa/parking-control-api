@@ -19,6 +19,14 @@ public class UserModel implements Serializable {
     @OneToOne(mappedBy = "user")
     private ParkingSpotModel parkingSpot;
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     public String getResponsibleName() {
         return responsibleName;
     }
